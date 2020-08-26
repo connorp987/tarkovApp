@@ -1,25 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+
+import { Button } from 'antd';
+
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom';
+import * as ROUTES from './routes';
+
+import 'antd/dist/antd.css'
+
+import Mytable from './Table'
+import About from './About.js'
+import Navigation from './Navigation'
+
+
 
 function App() {
-  return (
+
+  const [ammoStats, setAmmoStats] = useState([])
+
+  useEffect(() => {
+    fetch('https://us-central1-tarkovscrape.cloudfunctions.net/app/getData')
+      .then(res => res.json())
+      .then(json => {
+        setAmmoStats(json)
+        console.log(json)
+      })
+
+  }, []);
+
+  const Home = () => (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <About />
+      <Mytable data={ammoStats} />
     </div>
+  )
+
+  const Thetable = () => (
+    <div className="App">
+      <Mytable data={ammoStats} />
+    </div>
+  )
+
+
+  return (
+
+    <Router>
+      <div>
+        <Navigation />
+        <hr />
+
+        <Route exact path={ROUTES.HOME} component={Home} />
+        <Route exact path={ROUTES.TABLE} component={Thetable} />
+
+      </div>
+    </Router>
+
   );
 }
 

@@ -18,6 +18,15 @@
 .env.test.local
 .env.production.local
 
+/build
+/.firebase
+.firebaserc
+firebase.json
+client_id.json
+client_secret.json
+firebase-debug.lob
+
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
