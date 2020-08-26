@@ -1,5 +1,7 @@
 import React from 'react'
 import { Typography, Divider, Tag, Space, Button } from 'antd';
+import { Link } from "react-router-dom";
+import * as ROUTES from "./routes";
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -8,7 +10,7 @@ export default function About() {
 
   return (
     <Typography>
-      <div style={{marginLeft: '5%'}}>
+      <div style={{ marginLeft: '5%' }}>
         <Title level={2}>What am I looking at?</Title>
         <Paragraph>
           The numbers <Text code>1</Text> through <Text code>6</Text> represent each class of armor.
@@ -46,7 +48,11 @@ export default function About() {
           </ul>
         </Paragraph>
         <Title level={3}>Want to only view the chart?</Title>
-        <Button  type="primary"><a href="/table" target="_blank">Spreadsheet Backup</a></Button>
+        <Button type="primary">
+          <Link style={{ textDecoration: "none" }} to={ROUTES.TABLE}>
+            Click for Only Chart!
+          </Link>
+        </Button>
       </div>
 
       <Divider />
